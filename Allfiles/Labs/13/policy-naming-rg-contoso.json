@@ -1,0 +1,20 @@
+{
+  "mode": "All",
+  "parameters": {
+    "effect": {
+      "type": "String",
+      "allowedValues": [ "Audit", "Deny", "Disabled" ],
+      "defaultValue": "Audit",
+      "metadata": { "displayName": "Efeito" }
+    }
+  },
+  "policyRule": {
+    "if": {
+      "allOf": [
+        { "field": "type", "equals": "Microsoft.Resources/subscriptions/resourceGroups" },
+        { "field": "name", "notLike": "rg-contoso-*" }
+      ]
+    },
+    "then": { "effect": "[parameters('effect')]" }
+  }
+}
